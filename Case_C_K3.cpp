@@ -33,6 +33,34 @@ struct Pesanan{
     long long nilaiDiskon;
     long long totalBayar;
 };
+//Validasi input selain angka
+int bacaInt(const string &pesan){
+    int nilai;
+    while (true){
+        cout << pesan;
+        if (cin >> nilai){
+            cin.ignore(10000, '\n');
+            return nilai;
+        }
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout << "Input harus berupa angka!\n";
+    }
+}
+
+long long bacaLongLong(const string &pesan){
+    long long nilai;
+    while (true){
+        cout << pesan;
+        if (cin >> nilai){
+            cin.ignore(10000, '\n');
+            return nilai;
+        }
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cout << "Input harus berupa angka!\n";
+    }
+}
 
 //Fungsi untuk menambahkan produk baru
 //Pass by reference digunakan untuk mengubah jumlah produk
@@ -42,20 +70,34 @@ void tambahProduk(Produk *produk, int &jumlahProduk){
         return;
     }
 
-    cout << "\nMasukkan nama produk: ";
-    getline(cin, produk[jumlahProduk].nama);
+    do {
+        cout << "\nMasukkan nama produk: ";
+        getline(cin, produk[jumlahProduk].nama);
+        if (produk[jumlahProduk].nama.empty()){
+            cout << "Nama tidak boleh kosong!\n";
+        }
+    } while (produk[jumlahProduk].nama.empty());
 
-    cout << "Masukkan harga produk: Rp";
-    cin >> produk[jumlahProduk].harga;
+    do {
+        produk[jumlahProduk].harga = bacaLongLong("Masukkan harga produk: Rp");
+        if (produk[jumlahProduk].harga <= 0){
+            cout << "Harga harus lebih dari nol!\n";
+        }
+    } while (produk[jumlahProduk].harga <= 0);
 
-    cout << "Masukkan stok produk: ";
-    cin >> produk[jumlahProduk].stok;
+    do {
+        produk[jumlahProduk].stok = bacaInt("Masukkan stok produk: ");
+        if (produk[jumlahProduk].stok < 0){
+            cout << "Stok tidak boleh negatif!\n";
+        }
+    } while (produk[jumlahProduk].stok < 0);
 
-    cout << "Masukkan stok minimum: ";
-    cin >> produk[jumlahProduk].stokMinimum;
-
-    //Membersihkan sisa input sebelum menggunakan getline lagi
-    cin.ignore(10000, '\n');
+    do {
+        produk[jumlahProduk].stokMinimum = bacaInt("Masukkan stok minimum: ");
+        if (produk[jumlahProduk].stokMinimum < 0){
+            cout << "Stok minimum tidak boleh negatif!\n";
+        }
+    } while (produk[jumlahProduk].stokMinimum < 0);
 
     //Menambah jumlah produk yang terdaftar
     jumlahProduk++;
@@ -131,16 +173,13 @@ void prosesPesanan(Produk *produk, int jumlahProduk,
     }
 
     do {
-        cout << "Jumlah jenis produk yang dibeli (1-"
-             << batasItem << "): ";
-        cin >> p.jumlahItem;
+        p.jumlahItem = bacaInt("Jumlah jenis produk yang dibeli (1-"
+                               + to_string(batasItem) + "): ");
 
         if (p.jumlahItem < 1 || p.jumlahItem > batasItem) {
             cout << "Jumlah jenis produk tidak valid!\n";
         }
     } while (p.jumlahItem < 1 || p.jumlahItem > batasItem);
-
-    cin.ignore(10000, '\n');
 
     bool valid = true;
 
@@ -149,13 +188,8 @@ void prosesPesanan(Produk *produk, int jumlahProduk,
         int nomorProduk;
         int jumlahBeli;
 
-        cout << "\nMasukkan nomor produk: ";
-        cin >> nomorProduk;
-
-        cout << "Masukkan jumlah pembelian: ";
-        cin >> jumlahBeli;
-
-        cin.ignore(10000, '\n');
+        nomorProduk = bacaInt("\nMasukkan nomor produk: ");
+        jumlahBeli = bacaInt("Masukkan jumlah pembelian: ");
 
         // Mengubah nomor produk menjadi indeks array
         int indeks = nomorProduk - 1;
@@ -314,10 +348,7 @@ int main(){
         cout << "4. Laporan inventaris dan penjualan\n";
         cout << "5. Riwayat pesanan\n";
         cout << "0. Keluar\n";
-        cout << "Pilih menu: ";
-
-        cin >> pilihan;
-        cin.ignore(10000, '\n');
+        pilihan = bacaInt("Pilih menu: ");
 
         // Menjalankan fungsi berdasarkan pilihan menu
         switch (pilihan){
