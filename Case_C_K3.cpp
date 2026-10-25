@@ -187,12 +187,13 @@ void prosesPesanan(Produk *produk, int jumlahProduk,
     for (int i = 0; i < p.jumlahItem; i++){
         int nomorProduk;
         int jumlahBeli;
-        // Mengubah nomor produk menjadi indeks array
-        int indeks = nomorProduk - 1;
+     
 
 
         nomorProduk = bacaInt("\nMasukkan nomor produk: ");
-         // Memeriksa nomor produk
+        // Memeriksa nomor produk
+        // Mengubah nomor produk menjadi indeks array
+        int indeks = nomorProduk - 1;
         if (indeks < 0 || indeks >= jumlahProduk) {
             cout << "Nomor produk tidak ditemukan!\n";
             valid = false;
