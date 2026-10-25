@@ -66,7 +66,7 @@ long long bacaLongLong(const string &pesan){
 //Pass by reference digunakan untuk mengubah jumlah produk
 void tambahProduk(Produk *produk, int &jumlahProduk){
     if (jumlahProduk >= MAX_PRODUK) {
-        cout << "Kapasitas produk sudah penuh!\n"
+        cout << "Kapasitas produk sudah penuh!\n";
         return;
     }
 
