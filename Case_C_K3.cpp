@@ -187,19 +187,21 @@ void prosesPesanan(Produk *produk, int jumlahProduk,
     for (int i = 0; i < p.jumlahItem; i++){
         int nomorProduk;
         int jumlahBeli;
-
-        nomorProduk = bacaInt("\nMasukkan nomor produk: ");
-        jumlahBeli = bacaInt("Masukkan jumlah pembelian: ");
-
         // Mengubah nomor produk menjadi indeks array
         int indeks = nomorProduk - 1;
 
-        // Memeriksa nomor produk
+
+        nomorProduk = bacaInt("\nMasukkan nomor produk: ");
+         // Memeriksa nomor produk
         if (indeks < 0 || indeks >= jumlahProduk) {
             cout << "Nomor produk tidak ditemukan!\n";
             valid = false;
             break;
         }
+        jumlahBeli = bacaInt("Masukkan jumlah pembelian: ");
+
+      
+       
 
         // Memeriksa agar produk yang sama tidak dipilih dua kali
         for (int j = 0; j < i; j++){
