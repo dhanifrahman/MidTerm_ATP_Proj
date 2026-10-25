@@ -71,7 +71,7 @@ void tambahProduk(Produk *produk, int &jumlahProduk){
     }
 
     do {
-        cout << "\nMasukkan nama produk: ";
+        cout << "\nMasukkan nama produk: "
         getline(cin, produk[jumlahProduk].nama);
         if (produk[jumlahProduk].nama.empty()){
             cout << "Nama tidak boleh kosong!\n";
