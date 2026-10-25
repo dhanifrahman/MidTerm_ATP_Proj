@@ -187,19 +187,22 @@ void prosesPesanan(Produk *produk, int jumlahProduk,
     for (int i = 0; i < p.jumlahItem; i++){
         int nomorProduk;
         int jumlahBeli;
+     
+
 
         nomorProduk = bacaInt("\nMasukkan nomor produk: ");
-        jumlahBeli = bacaInt("Masukkan jumlah pembelian: ");
-
+        // Memeriksa nomor produk
         // Mengubah nomor produk menjadi indeks array
         int indeks = nomorProduk - 1;
-
-        // Memeriksa nomor produk
         if (indeks < 0 || indeks >= jumlahProduk) {
             cout << "Nomor produk tidak ditemukan!\n";
             valid = false;
             break;
         }
+        jumlahBeli = bacaInt("Masukkan jumlah pembelian: ");
+
+      
+       
 
         // Memeriksa agar produk yang sama tidak dipilih dua kali
         for (int j = 0; j < i; j++){
@@ -281,7 +284,7 @@ void prosesPesanan(Produk *produk, int jumlahProduk,
 }
 
 // Fungsi untuk menampilkan laporan inventaris dan penjualan
-void laporan(Produk *produk, int jumlahProduk,
+void laporan(const Produk *produk, int jumlahProduk,
              int jumlahPesanan, long long totalPenjualan) {
 
     cout << "\n===== LAPORAN INVENTARIS =====\n";
