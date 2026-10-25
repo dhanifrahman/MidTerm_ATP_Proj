@@ -284,7 +284,7 @@ void prosesPesanan(Produk *produk, int jumlahProduk,
 }
 
 // Fungsi untuk menampilkan laporan inventaris dan penjualan
-void laporan(Produk *produk, int jumlahProduk,
+void laporan(const Produk *produk, int jumlahProduk,
              int jumlahPesanan, long long totalPenjualan) {
 
     cout << "\n===== LAPORAN INVENTARIS =====\n";
